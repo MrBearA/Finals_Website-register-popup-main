@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap");
+
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  font-family: 'Zen Dots', sans-serif;
+  color: #fff;
+  width: 100vw;
+  position: relative;
+}
+
+/* Navbar Styling */
+.navbar {
+  position: absolute;
+  background-color: #24252A;
+  width: 100%;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+}
+
+/* Login Icon Styling */
+.loginicon {
+  position: absolute;
+  width: 80px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  color: black;
+  height: 40px;
+  left: 85%;
+  top: 10px;
+  background: #2bc6ff;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.loginicon:hover {
+  color: white;
+}
+
+/* Login Form Styling */
+.login-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-box {
+  margin-top: 7vh;
+  opacity: 80%;
+  background: black;
+  padding-right: 80px;
+  padding-left: 80px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.login-text {
+  width: 100%;
+  color: white;
+  border-bottom: 2px solid white;
+  line-height: 30px;
+  font-weight: bolder;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5vh;
+}
+
+label {
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box {
+  border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 2px;
+  padding-left: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin: 5px;
+  font-size: 11pt;
+  background: transparent;
+  transition: 1s;
+  outline: none;
+}
+
+.login-btn {
+  width: 75%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(48, 172, 251);
+  color: white;
+  margin-top: 5px;
+  border-radius: 20px;
+  border: none;
+  font-size: 15pt;
+  font-weight: 700;
+  transition: 1s;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+  letter-spacing: 4px;
+  background-color: #7fffd4;
+  color: #1e90ff;
+}
+
+/* Modal overlay to center the login popup */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 1; /* Initial opacity */
+  transition: opacity 0.5s ease; /* Transition for fade-out */
+}
+
+.modal-overlay.fade-out {
+  opacity: 0; /* Fade out effect */
+  pointer-events: none; /* Prevent interaction when fading out */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+/* Styling for the popup box */
+.login-box {
+  min-width: 700px; /* Increased min width for better layout */
+  max-width: 900px;
+  display: flex;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgb(0, 238, 255);
+  position: relative;
+}
+
+/* Close button styling */
+.close-button {
+  font-size: 24px;
+  color: #00fff6;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease; /* Transition for the animation */
+  position: absolute; /* Positioning for top right */
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+}
+
+.close-button:hover {
+  transform: scale(1.3) rotate(90deg); /* Scale and rotate the button */
+  color: #ff007a; /* Change color on hover */
+}
+
+/* General styling for both Sign-in and Sign-up sections */
+.sign-in-section,
+.sign-up-section {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px; /* Ensures each section has enough space */
+}
+
+/* Fix Heading alignment and spacing */
+.sign-in-section h2,
+.sign-up-section h1 {
+  font-family: 'Zen Dots', sans-serif;
+  color: #f6d8d5;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sign-up-section h1 {
+  font-size: 42px;
+}
+
+.sign-up-section p {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Input fields */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+form input {
+  width: 80%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(0, 255, 255, 0.1);
+  color: #00fff6;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+form input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Buttons */
+.sign-in-btn,
+.sign-up-btn {
+  width: 85%;
+  padding: 15px 0;
+  background-color: #00fff6;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.sign-in-btn:hover,
+.sign-up-btn:hover {
+  transform: scale(1.1);
+  background-color: #ff007a;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 0, 122, 0.9), 0 0 30px rgba(255, 0, 122, 0.7);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  color: #00fff6;
+  text-decoration: none;
+  font-size: 15px;
+  margin-top: 20px;
+  text-align: center;
+  display: block;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Animation Classes */
+.show {
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.show.active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}

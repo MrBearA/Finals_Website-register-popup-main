@@ -1,0 +1,233 @@
+/* AboutUs.css */
+
+/* Full-screen container */
+.about-us-container {
+    position: relative;
+    width: 100vw; 
+    min-height: 100vh; 
+    padding-top: 5%;
+    background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cbe5d52e-cbba-4a4a-a3e9-9c01bf5a2c7e/dgf2c34-3582ff70-93ee-4a65-bd1d-3558875db057.jpg/v1/fill/w_1192,h_670,q_70,strp/street_water_city_by_tomawak29_dgf2c34-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvY2JlNWQ1MmUtY2JiYS00YTRhLWEzZTktOWMwMWJmNWEyYzdlXC9kZ2YyYzM0LTM1ODJmZjcwLTkzZWUtNGE2NS1iZDFkLTM1NTg4NzVkYjA1Ny5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.mZKbVKUiK4DB50xycEe6M-4gycsRVY-xz3MHDKtDxFM') no-repeat center center/cover;
+    background-size: cover; 
+    overflow: auto; 
+}
+
+/* Dark overlay effect */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1; /* Should be lower than the navbar */
+}
+
+/* Content wrapper */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 15px; /* Reduced padding */
+    max-width: 1200px; /* Adjusted max-width */
+    margin: 0 auto; 
+    color: white;
+    text-align: center;
+}
+
+/* Main title styling */
+.AboutUs-title {
+    font-size: 2.5rem; /* Reduced font size */
+    font-family: "Zen Dots", sans-serif; 
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-top: 50px; /* Reduced margin */
+    margin-bottom: 10px; 
+}
+
+/* Cards Container */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px; /* Reduced gap */
+    margin-top: 20px; /* Reduced margin */
+}
+
+/* Individual Card Styling */
+.card {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 8px; /* Reduced radius */
+    padding: 15px; /* Reduced inner spacing */
+    width: 250px; /* Adjusted width */
+    text-align: center; 
+    color: white; 
+    transition: transform 0.2s; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+.card:hover {
+    transform: scale(1.03); /* Adjusted hover scale */
+}
+
+/* Card Title Styling */
+.card h2 {
+    margin: 0; 
+    font-size: 1.2rem; /* Reduced title size */
+    color: #ffffff; 
+}
+
+/* Card Paragraph Styling */
+.card p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9rem; /* Reduced paragraph size */
+    margin: 5px 0 0; 
+}
+
+/* Store Locations Title */
+.store-locations-title {
+    margin-top: 30px; /* Reduced margin */
+    font-size: 2.5rem; /* Reduced title size */
+    color: white;
+    text-align: center;
+    font-family: 'Zen Dots', sans-serif;
+    text-transform: uppercase;
+}
+
+/* Store Locations Cards Container */
+.location-cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Reduced gap */
+    padding: 20px 0; /* Reduced padding */
+}
+
+/* Location card styling */
+.flip-card {
+    background-color: transparent;
+    width: 250px; /* Adjusted width */
+    height: 350px; /* Adjusted height */
+    perspective: 1000px; 
+    margin: 16px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+    border-radius: 6px; /* Reduced radius */
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Neon glow effect */
+.neon {
+    position: relative; 
+}
+
+.neon::before {
+    content: ""; 
+    position: absolute;
+    top: -8px; /* Reduced positioning */
+    left: -8px; 
+    right: -8px; 
+    bottom: -8px; 
+    border-radius: 10px; 
+    background: rgba(255, 255, 255, 0.5); 
+    filter: blur(15px); /* Reduced blur */
+    z-index: -1; 
+    opacity: 0.7; 
+}
+
+/* Front and Back of the Flip Card */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 6px; /* Reduced radius */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    padding: 15px; /* Reduced padding */
+    box-sizing: border-box;
+}
+
+.flip-card-front {
+    background-size: cover;
+    background-position: center;
+}
+
+.flip-card-back {
+    background-color: rgba(0, 0, 0, 0.95);
+    transform: rotateY(180deg);
+}
+
+/* Card Text Styling */
+.flip-card-front h4, .flip-card-front p,
+.flip-card-back p {
+    margin: 5px 0;
+    padding: 0 5px; /* Reduced padding */
+    max-width: 90%;
+    font-size: 0.9rem; /* Reduced font size */
+}
+
+.flip-card-front h4:hover,
+.flip-card-back p:hover {
+    color: #ffffff;
+}
+
+/* Ensure the flip-card has neon effect */
+.flip-card:hover .neon::before {
+    opacity: 1; 
+}
+
+/* Media Queries for Responsive Design */
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+    .about-us-container {
+        min-height: 100vh;
+    }
+
+    .AboutUs-title {
+        font-size: 2rem; /* Reduced for smaller screens */
+        margin-top: 40px; /* Reduced margin */
+    }
+
+    .cards-container {
+        flex-direction: column; 
+    }
+
+    .card {
+        width: 90%; /* Make cards responsive */
+    }
+
+    .flip-card {
+        width: 90%;
+        height: 250px; /* Adjusted size */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .AboutUs-title {
+        font-size: 1.5rem; /* Further reduced */
+        margin-top: 20px;
+    }
+
+    .card, .flip-card {
+        width: 100%; /* Full width on mobile */
+    }
+
+    .flip-card {
+        height: 200px; /* Adjusted height */
+    }
+}
