@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import img2 from '../Images/2.png'; // Adjust paths accordingly
 import codeImage from '../Images/code.png';
 import bgImage from '../Images/bg.png';
@@ -9,23 +9,33 @@ import rock3Image from '../Images/rock3.png';
 import '../css_files/Beverages.css'; // Assuming you're using the same CSS
 
 const MyComponent = () => {
+  useEffect(() => {
+    // Add the class to the body when the component mounts
+    document.body.classList.add('drinks-page');
+
+    // Cleanup the class when the component unmounts
+    return () => {
+      document.body.classList.remove('drinks-page');
+    };
+  }, []);
+
   return (
     <div>
       {/* Header Section */}
       <header>
         <div className="left">
-          <h1>CSS ONLY</h1>
+          <h1>DRINKS</h1>
           <img src={img2} alt="2" />
         </div>
         <div className="author">
-          <h3>LUN DEV</h3>
+          <h3>OUR MENU</h3>
           <div>
-            <p>Design By</p>
-            <p>Lun Dev</p>
+            <p>EXTRA</p>
+            <p>HOURS</p>
           </div>
           <div>
-            <p>Code By</p>
-            <p>Lun Dev</p>
+            <p>DRINKS</p>
+            <p>CATALOGUE</p>
           </div>
           <img src={codeImage} alt="Code" />
         </div>
