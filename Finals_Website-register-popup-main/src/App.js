@@ -6,7 +6,6 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Login from './components/Login';
 import Beverages from './components/Beverages';
-import Pastries from './components/Pastries';
 import Merchandise from './components/Merchandise';
 
 const App = () => {
@@ -29,7 +28,6 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/beverages" element={<Beverages />} />
-          <Route path="/pastries" element={<Pastries />} />
           <Route path="/merchandise" element={<Merchandise />} />
         </Routes>
       </div>
