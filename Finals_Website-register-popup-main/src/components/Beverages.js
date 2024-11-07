@@ -24,7 +24,7 @@ const MyComponent = () => {
             <p>Lun Dev</p>
           </div>
           <div>
-            <p>Code By</p>
+            <p>Codes By</p>
             <p>Lun Dev</p>
           </div>
           <img src={codeImage} alt="Code" />

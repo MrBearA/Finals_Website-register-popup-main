@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GiCoffeeBeans } from 'react-icons/gi';
 import '../css_files/Sign-up.css';
-import axios from 'axios'
+import axios from 'axios';
 
 const SignUp = ({ isOpen, onClose, onRegisterComplete }) => {
   const [closing, setClosing] = useState(false);
@@ -14,28 +14,29 @@ const SignUp = ({ isOpen, onClose, onRegisterComplete }) => {
 
   const handleRegister = (e) => {
     e.preventDefault(); // Prevent form submission
-    axios.post('', {name,email,password,passwordConfirm})
-    .then(result => console.log(result)
-    .catch(err=> console.log(err))
-  )
+
+    // Update the URL to your backend registration endpoint
+    axios.post('http://localhost:5000/register', { name, email, password, passwordConfirm })
+      .then(result => {
+        console.log(result);
+        alert('Register complete'); // Display message after registration
+
+        setTimeout(() => {
+          onClose(); // Close SignUp modal
+          if (typeof onRegisterComplete === 'function') { // Check if onRegisterComplete is a function
+            onRegisterComplete(); // Open the Login modal
+          } else {
+            console.error('onRegisterComplete is not a function');
+          }
+        }, 500); // Adjust timing as needed
+      })
+      .catch(err => console.log(err));
 
     // Log or use the values stored in state variables
     console.log("Name:", name);
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Password Confirm:", passwordConfirm);
-
-    // Show an alert message
-    alert('Register complete'); // Display message after registration
-
-    setTimeout(() => {
-      onClose(); // Close SignUp modal
-      if (typeof onRegisterComplete === 'function') { // Check if onRegisterComplete is a function
-        onRegisterComplete(); // Open the Login modal
-      } else {
-        console.error('onRegisterComplete is not a function');
-      }
-    }, 500); // Adjust timing as needed
   };
 
   useEffect(() => {
