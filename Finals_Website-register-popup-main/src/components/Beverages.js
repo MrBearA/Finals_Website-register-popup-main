@@ -12,7 +12,7 @@ const MyComponent = () => {
 
   const contentData = [
     {
-      description: 'A bold cyberpunk-inspired energy drink can with a fierce red oni mask, cybernetic eye, and flames. It promises an "Energy Boost" with Guarana, Vitamin B12, and Niacin. The "Lychee-Jasmine" flavor stands out in a neon yellow font, adding a unique twist to its intense, futuristic look.',
+      description: 'A bold cyberpunk-inspired energy drink can with a fierce red oni mask, cybernetic eye, and flames. It promises an "Energy Boost" with Vitamin B12, and Niacin. The "Lychee-Jasmine" flavor stands out in a neon yellow font, adding a unique twist to its intense, futuristic look.',
       canImage: can1Image,
     },
     {
