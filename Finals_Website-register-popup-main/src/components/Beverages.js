@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import codeImage from '../Images/code.png';
 import can1Image from '../Images/can1.png';
-//import can2Image from '../Images/can2.png';
 import rock2Image from '../Images/rock2.png';
 import rock3Image from '../Images/rock3.png';
 import stageImage from '../Images/stage.png';
