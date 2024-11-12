@@ -9,6 +9,7 @@ import SignUp from './components/Sign-up';
 import Beverages from './components/Beverages';
 import Pastries from './components/Pastries';
 import Merchandise from './components/Merchandise';
+import ProductDetail from './components/ProductDetail'; // Import ProductDetail component
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/beverages" element={<Beverages />} />
           <Route path="/pastries" element={<Pastries />} />
           <Route path="/merchandise" element={<Merchandise />} />
+          <Route path="/item/:id" element={<ProductDetail />} /> {/* Route for product details */}
         </Routes>
       </div> 
 
