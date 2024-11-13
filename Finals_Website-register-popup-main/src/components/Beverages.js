@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import codeImage from '../Images/code.png';
 import can1Image from '../Images/can1.png';
+import can2Image from '../Images/can2.png';
+import can3Image from '../Images/can3.png';
 import rock2Image from '../Images/rock2.png';
 import rock3Image from '../Images/rock3.png';
 import stageImage from '../Images/stage.png';
@@ -15,8 +17,12 @@ const MyComponent = () => {
       canImage: can1Image,
     },
     {
-      description: 'A refreshing drink with an icy blue aesthetic, decorated with frosty, metallic textures. This "Mint-Citrus" flavored drink offers a cool energy boost, highlighting Vitamin C and Taurine for a crisp and revitalizing taste.',
-      //canImage: can2Image,
+      description: 'This is a Cyberpunk Oshee energy drink can featuring a bold and intense design. The artwork showcases a fiery red demonic face with cybernetic elements. The drink is labeled as "ENERGY BOOST" with a bubble gum flavor and contains guarana for added energy. The striking black and red color scheme adds to its fierce, high-energy aesthetic.',
+      canImage: can2Image,
+    },
+    {
+      description: 'This can of Rockstar Recovery is a bright yellow energy and hydration drink, designed to catch the eye. With a refreshing lemonade flavor, this non-carbonated drink offers electrolytes and only 10 calories per can, providing a quick boost and hydration in one.',
+      canImage: can3Image,
     },
   ];
 
