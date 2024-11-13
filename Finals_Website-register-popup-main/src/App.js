@@ -7,7 +7,6 @@ import AboutUs from './components/AboutUs';
 import Login from './components/Login';
 import SignUp from './components/Sign-up';
 import Beverages from './components/Beverages';
-import Pastries from './components/Pastries';
 import Merchandise from './components/Merchandise';
 import ProductDetail from './components/ProductDetail'; // Import ProductDetail component
 import { ToastContainer } from 'react-toastify';
@@ -53,7 +52,6 @@ const App = () => {
           />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/beverages" element={<Beverages />} />
-          <Route path="/pastries" element={<Pastries />} />
           <Route path="/merchandise" element={<Merchandise />} />
           <Route path="/item/:id" element={<ProductDetail />} /> {/* Route for product details */}
         </Routes>

@@ -26,7 +26,7 @@ const Home = ({ onEnterCafeClick }) => {
         <h1 className="main-title">{displayedText}</h1>
         <h2 className="sub-title">A CYBERPUNK THEMED CAFE BASED IN THE HEART OF JAPAN</h2>
         <Link to="/about-us" onClick={onEnterCafeClick}> {/* Trigger glitch effect on click */}
-          <button className="enter-button">ENTER CAFE!!</button>
+          <button className="enter-button">ENTER CAFE</button>
         </Link>
       </div>
     </div>

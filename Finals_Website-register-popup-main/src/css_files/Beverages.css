@@ -1,21 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
-body {
+/* Apply to body when on the drinks page */
+body.drinks-page {
     min-height: 100vh;
     margin: 0;
     font-family: Poppins, sans-serif;
     color: #1E1E1E;
-    background-color: #CDCDCD;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
     background-image:
-    repeating-linear-gradient(
-        to right, transparent 0 150px, #0001 150px 151px
-    ),
-    repeating-linear-gradient(
-        to bottom, transparent 0 150px, #0001 150px 151px
-    ),
-    linear-gradient(to right, #CDCDCDcc, #CDCDCDcc),
-    url('../Images/bg.jpg'); /* Adjust the image path */
+        repeating-linear-gradient(
+            to right, transparent 0 150px, #0001 150px 151px
+        ),
+        repeating-linear-gradient(
+            to bottom, transparent 0 150px, #0001 150px 151px
+        ),
+        linear-gradient(to right, #000000cc, #000000cc),
+        url('../Images/background.jpg'); /* Adjust the image path */
+    padding-top: 50px; /* Move everything down on the drinks page */
 }
 
+/* Reset padding and margin for all elements */
 * {
     padding: 0;
     margin: 0;
@@ -29,11 +31,13 @@ header {
     padding-top: 50px;
     height: 0px;
     flex-wrap: wrap;
+    color: white;
 }
 
 header h1 {
-    font-family: "Karantina", system-ui;
-    font-size: 16vw;
+    font-family: 'Zen Dots', sans-serif;
+    color: white;
+    font-size: 10vw;
     line-height: 0.8em;
     margin-bottom: 100px; /* Adjust to give space between text and can */
 }
@@ -43,11 +47,13 @@ header .author {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    color: white;
 }
 
 header h3 {
-    font-family: "Karantina", system-ui;
-    font-size: 5vw;
+    font-family: "Open Sans", sans-serif;
+    font-size: 3vw;
+    color: white;
 }
 
 header .author div {
@@ -63,6 +69,39 @@ header .author div p:nth-child(2) {
 header .author img {
     width: 250px;
 }
+
+.left-text {
+    text-align: justify;
+    max-width: 300px; /* Adjust as needed */
+    margin-left: 10px;
+}
+
+.next-arrow {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+    transition: color 0.3s;
+  
+    /* Use absolute positioning */
+    position: absolute;
+    bottom: 370px;  /* Adjust this value to move the arrow up or down */
+    right: 130px; /* Move the arrow to the right side */
+  }
+  
+  .next-arrow svg {
+    transform: scale(3); 
+    transition: transform 0.3s;
+  }
+  
+  .next-arrow:hover svg {
+    transform: scale(1.6); /* Slightly larger on hover */
+  }
+  
+  
 
 .banner {
     margin-top: -50px;
@@ -127,8 +166,8 @@ header .author img {
 
 .rock img:nth-child(1) {
     position: absolute;
-    height: 170px;
-    left: 50%;
+    height: 225px;
+    left: 50.5%;
     transform: translateX(-50%);
     bottom: 0px; /* Adjusted to match reference */
     transition: 0.7s;
