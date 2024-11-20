@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GiCoffeeBeans } from 'react-icons/gi';
 import '../css_files/Sign-up.css';
 import axios from 'axios';
+import { toast } from 'react-toastify';  // <-- Import toast here
 
 const SignUp = ({ isOpen, onClose, onRegisterComplete }) => {
   const [closing, setClosing] = useState(false);
@@ -15,12 +16,10 @@ const SignUp = ({ isOpen, onClose, onRegisterComplete }) => {
   const handleRegister = (e) => {
     e.preventDefault(); // Prevent form submission
 
-    // Update the URL to your backend registration endpoint
+    // Send data to the backend for registration
     axios.post('http://localhost:5000/register', { name, email, password, passwordConfirm })
       .then(result => {
-        console.log(result);
-        alert('Register complete'); // Display message after registration
-
+        toast.success('Register complete'); // <-- Now toast works here
         setTimeout(() => {
           onClose(); // Close SignUp modal
           if (typeof onRegisterComplete === 'function') { // Check if onRegisterComplete is a function
@@ -30,7 +29,10 @@ const SignUp = ({ isOpen, onClose, onRegisterComplete }) => {
           }
         }, 500); // Adjust timing as needed
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        toast.error(err.response?.data?.message || 'An error occurred');  // <-- And here as well
+        console.log(err);
+      });
 
     // Log or use the values stored in state variables
     console.log("Name:", name);

@@ -19,7 +19,6 @@ const Login = ({ isOpen, onClose, onSignUp }) => {
   };
 
   const handleSignUpClick = () => {
-    console.log('onSignUp function:', onSignUp); // Debugging: check if onSignUp is passed
     if (typeof onSignUp === 'function') {
       onClose();  // Close Login modal
       onSignUp(); // Open SignUp modal
@@ -37,6 +36,7 @@ const Login = ({ isOpen, onClose, onSignUp }) => {
         email,
         password
       });
+
       toast.success(response.data.message);
       localStorage.setItem('token', response.data.token); // Save token to localStorage
       onClose(); // Close the login modal after successful login
