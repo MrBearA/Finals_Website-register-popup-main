@@ -1,0 +1,54 @@
+/* Navbar styling */
+.navbar {
+  width: 100%; /* Ensure navbar takes full width */
+  padding: 1rem 0; /* Add vertical padding */
+  text-align: center;
+  position: fixed; /* Stays at the top of the viewport */
+  top: 0; /* Align to the top of the page */
+  left: 0;
+  z-index: 10; /* Ensure the navbar is above the background */
+  background-color: rgba(0, 0, 0, 0.406); /* Semi-transparent background for contrast */
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between; /* Push left and right links apart */
+  align-items: center; /* Vertically align both left and right links */
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center; /* Ensures all links are vertically centered */
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+/* Link styling */
+.nav-link {
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
+  margin: 0 30px; /* Increase horizontal margin */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.nav-link:hover {
+  color: rgb(255, 0, 0); /* Highlight color on hover */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 0; /* Reduce padding for smaller screens */
+  }
+
+  .nav-link {
+    margin: 0 15px; /* Reduce margin for smaller screens */
+  }
+}
