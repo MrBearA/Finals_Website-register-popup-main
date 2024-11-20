@@ -254,12 +254,11 @@ header .author img {
 /* Floating Cart */
 .floating-cart {
     position: fixed;
-    top: 10px;   /* Moves the cart 10px from the top */
+    top: 40px;   /* Moves the cart 10px from the top */
     left: 10px;  /* Moves the cart 10px from the left edge */
     background-color: rgba(0, 0, 0, 0.7);  /* Semi-transparent background */
     color: white;
     padding: 15px;
-    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
     z-index: 10;
 }
