@@ -131,23 +131,15 @@ const products = [
     },
 ];
 
-const ProductDetail = () => {
+const ProductDetail = ({ addToCart }) => {
     const { id } = useParams();
     const product = products.find((p) => p.id === parseInt(id));
 
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(product.images[0]);
-    const [isDescription, setIsDescription] = useState(true); 
-    const [isZoomed, setIsZoomed] = useState(false); 
-    const [selectedSize, setSelectedSize] = useState('M'); 
-    const [selectedRating, setSelectedRating] = useState(0);
-    const [reviewText, setReviewText] = useState('');
-    const [reviews, setReviews] = useState([]);
-    const [review, setReview] = useState('');
-    const [userReviews, setUserReviews] = useState([]);
-    const [selectedColor, setSelectedColor] = useState([]);
-
-
+    const [isZoomed, setIsZoomed] = useState(false);
+    const [selectedSize, setSelectedSize] = useState('M');
+    const [selectedColor, setSelectedColor] = useState('black');
 
     const handleQuantityChange = (e) => {
         const value = e.target.value;
@@ -156,11 +148,19 @@ const ProductDetail = () => {
         }
     };
 
-    const handleReviewSubmit = (e) => {
-        e.preventDefault();
-        if (reviewText.trim()) {
-            setReviews([...reviews, reviewText]);
-            setReviewText('');
+    const handleAddToCart = () => {
+        if (product) {
+            const cartItem = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity,
+                size: selectedSize,
+                color: selectedColor,
+                image: selectedImage,
+            };
+            addToCart(cartItem); // Ensure this is a function
+            alert('Item added to cart!');
         }
     };
 
@@ -171,10 +171,16 @@ const ProductDetail = () => {
             <div className="overlay"></div>
             <div className="product-detail">
                 <div className="image-gallery">
-                    <div className="main-image"
-                         onMouseEnter={() => setIsZoomed(true)}
-                         onMouseLeave={() => setIsZoomed(false)}>
-                        <img src={selectedImage} alt={product.name} className={`product-image ${isZoomed ? 'zoomed' : ''}`} />
+                    <div
+                        className="main-image"
+                        onMouseEnter={() => setIsZoomed(true)}
+                        onMouseLeave={() => setIsZoomed(false)}
+                    >
+                        <img
+                            src={selectedImage}
+                            alt={product.name}
+                            className={`product-image ${isZoomed ? 'zoomed' : ''}`}
+                        />
                         {isZoomed && (
                             <div className="magnifying-glass">
                                 <img src={selectedImage} alt={product.name} className="zoomed-image" />
@@ -195,21 +201,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="product-info">
                     <h2>{product.name}</h2>
-                    <div className="rating">
-                        <div className="star-rating">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <button
-                                    key={star}
-                                    className={`star-button ${star <= selectedRating ? 'selected' : ''}`}
-                                    onClick={() => setSelectedRating(star)}
-                                    aria-label={`${star} star`}
-                                >
-                                    ★
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <h3>Price: {product.price}</h3>
+                    <h3>Price: ${product.price}</h3>
                     <hr className="Separator" />
                     {product.type === 'graphic tee' && (
                         <>
@@ -220,40 +212,36 @@ const ProductDetail = () => {
                                         <button
                                             key={size}
                                             className={`size-button ${selectedSize === size ? 'selected' : ''}`}
-                                            onClick={() => setSelectedSize(size)}>
+                                            onClick={() => setSelectedSize(size)}
+                                        >
                                             {size}
                                         </button>
                                     ))}
                                 </div>
                             </div>
-                            {product.name === 'Retro Graphic Tee' && (
-                                <div className="color-selection">
-                                    <label>Color: </label>
-                                    <div className="color-buttons">
-                                        <button
-                                            className={`color-button ${selectedColor === 'black' ? 'selected' : ''}`}
-                                            onClick={() => {
-                                                setSelectedColor('black');
-                                                setSelectedImage(product.images[0]); 
-                                            }}
-                                            style={{ backgroundColor: 'black' }}
-                                        ></button>
-                                        <button
-                                            className={`color-button ${selectedColor === 'white' ? 'selected' : ''}`}
-                                            onClick={() => {
-                                                setSelectedColor('white');
-                                                setSelectedImage(product.images[1]); 
-                                            }}
-                                            style={{ backgroundColor: 'white' }}
-                                        ></button>
-                                    </div>
+                            <div className="color-selection">
+                                <label>Color: </label>
+                                <div className="color-buttons">
+                                    <button
+                                        className={`color-button ${selectedColor === 'black' ? 'selected' : ''}`}
+                                        onClick={() => {
+                                            setSelectedColor('black');
+                                            setSelectedImage(product.images[0]);
+                                        }}
+                                        style={{ backgroundColor: 'black' }}
+                                    ></button>
+                                    <button
+                                        className={`color-button ${selectedColor === 'white' ? 'selected' : ''}`}
+                                        onClick={() => {
+                                            setSelectedColor('white');
+                                            setSelectedImage(product.images[1]);
+                                        }}
+                                        style={{ backgroundColor: 'white' }}
+                                    ></button>
                                 </div>
-                            )}
+                            </div>
                         </>
                     )}
-
-                    <h4>Brand: {product.brand}</h4>
-
                     <label>Quantity:</label>
                     <input
                         type="number"
@@ -262,26 +250,13 @@ const ProductDetail = () => {
                         min="1"
                         className="quantity-input"
                     />
-                    <button className="enter-button">Add to Cart</button>
+                    <button className="enter-button" onClick={handleAddToCart}>
+                        Add to Cart
+                    </button>
                     <button className="enter-button">Checkout</button>
-
                     <div className="description">
                         <h5>Description</h5>
                         <p>{product.description}</p>
-                    </div>
-                    <div className="reviews">
-                        <h3>User Reviews</h3>
-                        {userReviews.length > 0 ? userReviews.map((rev, index) => <p key={index}>{rev}</p>) : <p>No reviews yet.</p>}
-                        <input
-                            type="text"
-                            value={review}
-                            onChange={(e) => setReview(e.target.value)}
-                            placeholder="Write your review..."
-                            className="review-input"
-                        />
-                        <div className="review-submit-container">
-                            <button className="button" onClick={handleReviewSubmit}>Submit</button>
-                        </div>
                     </div>
                 </div>
             </div>

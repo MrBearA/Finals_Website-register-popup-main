@@ -141,7 +141,7 @@
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 30px;
     padding: 20px;
     flex: 1;
     max-height: 80vh;
@@ -202,4 +202,63 @@
       border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     }
   }
+  /* Cart Section Styles */
+.cart-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7); /* Slight transparency for a cyberpunk theme */
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cart-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #fffb00; /* Neon accent line */
+  padding-bottom: 0.5rem;
+}
+
+.cart-section p {
+  font-size: 1rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.cart-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-section li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #444;
+}
+
+.cart-section li:last-child {
+  border-bottom: none;
+}
+
+.cart-section li button {
+  background-color: #ff0099;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-section li button:hover {
+  background-color: #d4007f;
+}
+
+.cart-section li button:active {
+  transform: scale(0.95);
+}
+
   

@@ -9,6 +9,8 @@ import SignUp from './components/Sign-up';
 import Beverages from './components/Beverages';
 import Merchandise from './components/Merchandise';
 import ProductDetail from './components/ProductDetail'; // Import ProductDetail component
+import Cart from './components/Cart'; // Import Cart component
+import Payments from './components/Payments'; // Import Payments component
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,6 +19,7 @@ const App = () => {
   const [glitch, setGlitch] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const handleEnterCafeClick = () => {
     setGlitch(true);
@@ -40,22 +43,29 @@ const App = () => {
     setIsSignUpOpen(false);
   };
 
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+  };
+
+  const removeFromCart = (itemId) => {
+    setCart(cart.filter(item => item.id !== itemId));
+  };
+
   return (
     <div className={`app ${glitch ? 'glitch' : ''}`}>
-      <CustomNavbar />
+      <CustomNavbar cart={cart} />
       <div className="centered-container">
         <Routes location={location}>
           <Route path="/" element={<Home onEnterCafeClick={handleEnterCafeClick} />} />
-          <Route 
-            path="/login" 
-            element={<Login isOpen={isLoginOpen} onClose={closeModals} onSignUp={openSignUp} />} 
-          />
+          <Route path="/login" element={<Login isOpen={isLoginOpen} onClose={closeModals} onSignUp={openSignUp} />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/beverages" element={<Beverages />} />
           <Route path="/merchandise" element={<Merchandise />} />
-          <Route path="/item/:id" element={<ProductDetail />} /> {/* Route for product details */}
+          <Route path="/item/:id" element={<ProductDetail addToCart={addToCart} />} /> {/* Product Detail */}
+          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} /> {/* Cart */}
+          <Route path="/payment" element={<Payments cart={cart} />} /> {/* Payment */}
         </Routes>
-      </div> 
+      </div>
 
       {/* Login and SignUp modals */}
       {isSignUpOpen && (
@@ -77,3 +87,7 @@ const WrappedApp = () => (
 );
 
 export default WrappedApp;
+
+
+
+
