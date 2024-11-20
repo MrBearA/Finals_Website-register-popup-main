@@ -17,7 +17,8 @@ import '../css_files/Beverages.css';
 
 const MyComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [cart, setCart] = useState([]);
+  
   const contentData = [
     {
       description: 'Step into a futuristic world of energy with OSHEE Cyberpunk Lychee-Jasmine — a refreshing twist on traditional energy drinks. Featuring a captivating blend of lychee and jasmine flavors, this drink brings a unique and exotic taste that’s as daring as the bold black and yellow can it’s packed in.',
@@ -72,6 +73,14 @@ const MyComponent = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % contentData.length);
   };
 
+  const addToCart = (item) => {
+    setCart((prevCart) => [...prevCart, item]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart((prevCart) => prevCart.filter((_, i) => i !== index));
+  };
+
   return (
     <div>
       {/* Header Section */}
@@ -99,12 +108,10 @@ const MyComponent = () => {
       {/* Banner Section */}
       <div className="banner">
         <div className="product">
-          {/* Soda products with dynamic backgrounds */}
           <div className="soda" style={{ '--url': `url(${contentData[currentIndex].canImage})` }}></div>
           <div className="soda" style={{ '--url': `url(${contentData[currentIndex].canImage})` }}></div>
         </div>
 
-        {/* Rock images */}
         <div className="rock">
           <img src={stageImage} alt="stage" />
           <img src={rock2Image} alt="Rock 2" />
@@ -114,15 +121,31 @@ const MyComponent = () => {
 
       {/* Next Arrow Button */}
       <div className="next-arrow" onClick={handleNextClick}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="100"  /* Keep original size */
-          height="100"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" viewBox="0 0 24 24">
           <path d="M10 6l6 6-6 6" />
         </svg>
+      </div>
+
+      {/* Add Product Cards with Add to Cart Button */}
+      <div className="product-cards">
+        {contentData.map((product, index) => (
+          <div className="product-card" key={index}>
+            <img src={product.canImage} alt={`Can ${index + 1}`} />
+            <button className="add-to-cart-btn" onClick={() => addToCart(`Can ${index + 1}`)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
+
+      {/* Floating Cart */}
+      <div className="floating-cart">
+        <h3>Your Cart</h3>
+        <ul className="cart-items">
+          {cart.map((item, index) => (
+            <li key={index}>
+              {item} <span className="remove-item" onClick={() => removeFromCart(index)}>Remove</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
