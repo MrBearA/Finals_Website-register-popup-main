@@ -55,7 +55,7 @@ const Login = ({ isOpen, onClose, onSignUp }) => {
             <span className="close-button" onClick={handleClose}>&times;</span>
             <GiCoffeeBeans size={50} style={{ marginBottom: '10px' }} />
             <h1>Hello Friend!</h1>
-            <p>Register now to get exclusive deals and discounts!</p>
+            <p>Register now to get exclusive deals and discounts!!!</p>
             <button className="sign-up-btn" onClick={handleSignUpClick}>Sign Up</button>
           </div>
 
