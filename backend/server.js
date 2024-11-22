@@ -37,7 +37,7 @@ app.post('/register', async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already registered' });
+      return res.status(400).json({ message: 'Email is already registered. Please log in.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -70,9 +70,9 @@ app.post('/api/users/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: `Welcome back, ${user.name}!`, token, name: user.name });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
