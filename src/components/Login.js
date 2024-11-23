@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import '../css_files/Login.css';
 
-const Login = ({ isOpen, onClose, onSignUp }) => {
+const Login = ({ isOpen, onClose, onSignUp, onLoginSuccess }) => {
   const [closing, setClosing] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +29,7 @@ const Login = ({ isOpen, onClose, onSignUp }) => {
 
   // Handle the login form submission
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent page refresh on form submit
+    e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', {
@@ -38,8 +38,14 @@ const Login = ({ isOpen, onClose, onSignUp }) => {
       });
 
       toast.success(response.data.message);
-      localStorage.setItem('token', response.data.token); // Save token to localStorage
-      onClose(); // Close the login modal after successful login
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userName', response.data.name);
+      
+      // Dispatch custom event for login
+      window.dispatchEvent(new Event('userLogin'));
+      
+      onLoginSuccess(response.data.name);
+      onClose();
     } catch (error) {
       toast.error(error.response?.data?.message || 'An error occurred');
     }

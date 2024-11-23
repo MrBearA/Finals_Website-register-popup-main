@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FaLock } from 'react-icons/fa';
+import Login from './Login';
 import codeImage from '../Images/code.png';
 import can1Image from '../Images/can1.png';
 import can2Image from '../Images/can2.png';
@@ -18,7 +20,11 @@ import '../css_files/Beverages.css';
 const MyComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cart, setCart] = useState([]);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [isLoginOpen, setLoginOpen] = useState(false);
   
+  const isLoggedIn = localStorage.getItem('userName') !== null;
+
   const contentData = [
     {
       description: 'Step into a futuristic world of energy with OSHEE Cyberpunk Lychee-Jasmine — a refreshing twist on traditional energy drinks. Featuring a captivating blend of lychee and jasmine flavors, this drink brings a unique and exotic taste that’s as daring as the bold black and yellow can it’s packed in.',
@@ -73,8 +79,18 @@ const MyComponent = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % contentData.length);
   };
 
-  const addToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
+  const handleAddToCart = (item) => {
+    if (isLoggedIn) {
+      setCart((prevCart) => [...prevCart, item]);
+    } else {
+      setShowLoginPrompt(true);
+      setTimeout(() => setShowLoginPrompt(false), 3000);
+      setLoginOpen(true);
+    }
+  };
+
+  const handleLoginSuccess = (name) => {
+    setLoginOpen(false);
   };
 
   const removeFromCart = (index) => {
@@ -126,15 +142,31 @@ const MyComponent = () => {
         </svg>
       </div>
 
-      {/* Add Product Cards with Add to Cart Button */}
+      {/* Product Cards */}
       <div className="product-cards">
         {contentData.map((product, index) => (
           <div className="product-card" key={index}>
             <img src={product.canImage} alt={`Can ${index + 1}`} />
-            <button className="add-to-cart-btn" onClick={() => addToCart(`Can ${index + 1}`)}>Add to Cart</button>
+            <button 
+              className={`add-to-cart-btn ${!isLoggedIn ? 'disabled' : ''}`} 
+              onClick={() => handleAddToCart(`Can ${index + 1}`)}
+            >
+              {isLoggedIn ? (
+                <span className="plus-icon">+</span>
+              ) : (
+                <FaLock className="lock-icon" />
+              )}
+            </button>
           </div>
         ))}
       </div>
+
+      {/* Login Prompt */}
+      {showLoginPrompt && (
+        <div className="login-prompt">
+          Please login to add items to cart
+        </div>
+      )}
 
       {/* Floating Cart */}
       <div className="floating-cart">
@@ -147,6 +179,14 @@ const MyComponent = () => {
           ))}
         </ul>
       </div>
+
+      {/* Login Modal */}
+      <Login 
+        isOpen={isLoginOpen}
+        onClose={() => setLoginOpen(false)}
+        onSignUp={() => {}}
+        onLoginSuccess={handleLoginSuccess}
+      />
     </div>
   );
 };

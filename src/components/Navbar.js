@@ -8,48 +8,84 @@ import '../css_files/Navbar.css'; // Ensure the correct import
 
 const CustomNavbar = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const [isSignUpOpen, setSignUpOpen] = useState(false); // State to control SignUp modal
+  const [isSignUpOpen, setSignUpOpen] = useState(false);
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLoginClick = () => {
-    setLoginOpen(true);  // Open the Login modal
+    setLoginOpen(true);
   };
 
   const handleSignUpClick = () => {
-    setSignUpOpen(true);  // Open the SignUp modal directly from Navbar
+    setSignUpOpen(true);
   };
 
   const handleCloseLogin = () => {
-    setLoginOpen(false);  // Close the Login modal
+    setLoginOpen(false);
   };
 
   const handleCloseSignUp = () => {
-    setSignUpOpen(false);  // Close the SignUp modal
+    setSignUpOpen(false);
+  };
+
+  const handleLoginSuccess = (name) => {
+    setUserName(name);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    setUserName('');
+    setShowDropdown(false);
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
   };
 
   return (
     <>
       <Navbar expand="lg">
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between">
-          <Nav className="nav-left"> {/* Left-aligned links */}
+          <Nav className="nav-left">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/beverages">Beverages</Nav.Link>
             <Nav.Link as={Link} to="/merchandise">Merchandise</Nav.Link>
           </Nav>
-          <Nav className="nav-right"> {/* Right-aligned link */}
-            <Nav.Link onClick={handleLoginClick}>
-              <FaUser size={20} /> {/* User icon to trigger the login popup */}
-            </Nav.Link>
-            {/* Hide the SignUp link by commenting it out or removing it */}
-            {/* <Nav.Link onClick={handleSignUpClick}>Sign Up</Nav.Link> */}
+          <Nav className="nav-right">
+            <div className="user-section">
+              {userName && (
+                <div className="user-dropdown">
+                  <div className="cyberpunk-username" onClick={toggleDropdown}>
+                    <FaUser size={16} className="user-icon" />
+                    <span>{userName}</span>
+                  </div>
+                  {showDropdown && (
+                    <div className="dropdown-menu">
+                      <button onClick={handleSignOut}>Sign Out</button>
+                    </div>
+                  )}
+                </div>
+              )}
+              {!userName && (
+                <Nav.Link onClick={handleLoginClick}>
+                  <FaUser size={20} />
+                </Nav.Link>
+              )}
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
       
-      {/* Modals for Login and Sign Up */}
-      <Login isOpen={isLoginOpen} onClose={handleCloseLogin} onSignUp={handleSignUpClick} />
+      <Login 
+        isOpen={isLoginOpen} 
+        onClose={handleCloseLogin} 
+        onSignUp={handleSignUpClick}
+        onLoginSuccess={handleLoginSuccess}
+      />
       <SignUp isOpen={isSignUpOpen} onClose={handleCloseSignUp} />
     </>
   );
-};
+}
 
 export default CustomNavbar;
