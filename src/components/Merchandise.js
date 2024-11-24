@@ -14,8 +14,15 @@ const Merchandise = () => {
       try {
         const response = await fetch('http://localhost:5000/api/products');
         const data = await response.json();
-        setProducts(data);
-        setFilteredProducts(data); // Initially display all products
+        
+        // Fix product data to add a single 'image' field (the first image from the 'images' array)
+        const updatedData = data.map((product) => ({
+          ...product,
+          image: product.images[0],  // Using the first image in the 'images' array
+        }));
+
+        setProducts(updatedData);
+        setFilteredProducts(updatedData); // Initially display all products
       } catch (err) {
         console.error('Failed to fetch products', err);
       }
@@ -77,3 +84,4 @@ const Merchandise = () => {
 };
 
 export default Merchandise;
+

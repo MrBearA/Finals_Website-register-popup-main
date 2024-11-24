@@ -9,13 +9,19 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState('');
   const [reviews, setReviews] = useState([]);
+  const [reviewText, setReviewText] = useState('');
+  const [rating, setRating] = useState(0);
   const [error, setError] = useState(null);
 
+  // Fetch product details on component mount
   useEffect(() => {
     const fetchProduct = async () => {
+      if (!id) {
+        setError('Product ID is missing.');
+        return;
+      }
+
       try {
         const response = await fetch(`http://localhost:5000/api/products/${id}`);
         if (!response.ok) {
@@ -23,66 +29,72 @@ const ProductDetail = () => {
         }
         const data = await response.json();
         setProduct(data);
-        setSelectedImage(data.images[0]);
+        setSelectedImage(data.images?.[0] || '');
       } catch (err) {
         setError(err.message);
       }
     };
+
     fetchProduct();
   }, [id]);
 
+  // Handle submitting reviews
   const handleReviewSubmit = () => {
-    if (!reviewText.trim()) return; // Prevent submitting empty reviews
+    if (!reviewText.trim() || rating === 0) return; // Prevent empty reviews
     const newReview = { text: reviewText, rating };
     setReviews([...reviews, newReview]);
     setReviewText('');
+    setRating(0);
   };
 
-  const handleColorSelection = (color) => {
-    setSelectedColor(color);
+  // Handle color and size selection
+  const handleColorSelection = (color) => setSelectedColor(color);
+  const handleSizeSelection = (size) => setSelectedSize(size);
+
+  // Handle quantity change
+  const handleQuantityChange = (e) => {
+    const value = Math.max(1, parseInt(e.target.value, 10));
+    setQuantity(value);
   };
 
-  const handleSizeSelection = (size) => {
-    setSelectedSize(size);
-  };
-
-  if (error) return <div>Error: {error}</div>;
-  if (!product) return <div>Loading...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
+  if (!product) return <div className="loading">Loading...</div>;
 
   return (
     <div className="product-detail-container">
       <div className="overlay"></div>
       <div className="product-detail">
+        {/* Image Gallery */}
         <div className="image-gallery">
           <div className="main-image">
-            <img src={selectedImage} alt={product.name} className="product-image" />
-            <div className="magnifying-glass">
-              <img src={selectedImage} alt={product.name} className="zoomed-image" />
-            </div>
+            <img
+              src={selectedImage || '/placeholder.jpg'}
+              alt={product.name}
+              className="product-image"
+            />
           </div>
           <div className="thumbnail-container">
-            {product.images.map((image, index) => (
+            {product.images?.map((image, index) => (
               <img
                 key={index}
                 src={image}
-                alt={`${product.name} ${index + 1}`}
-                className="thumbnail"
+                alt={`Thumbnail ${index + 1}`}
+                className={`thumbnail ${selectedImage === image ? 'active' : ''}`}
                 onClick={() => setSelectedImage(image)}
               />
             ))}
           </div>
         </div>
 
+        {/* Product Info */}
         <div className="product-info">
           <h2>{product.name}</h2>
           <h3>Price: ${product.price}</h3>
-          <div className="description">
-            <p>{product.description}</p>
-          </div>
+          <p>{product.description}</p>
 
           {/* Size Selection */}
-          {product.sizes && (
-            <div className="size-spacing">
+          {product.sizes?.length > 0 && (
+            <div className="size-selection">
               <h4>Select Size:</h4>
               <div className="size-buttons">
                 {product.sizes.map((size, index) => (
@@ -99,26 +111,29 @@ const ProductDetail = () => {
           )}
 
           {/* Color Selection */}
-          {product.colors && (
-            <div className="color-options">
+          {product.colors?.length > 0 && (
+            <div className="color-selection">
               <h4>Select Color:</h4>
-              {product.colors.map((color, index) => (
-                <button
-                  key={index}
-                  className={`color-button ${selectedColor === color ? 'selected' : ''} ${color}`}
-                  onClick={() => handleColorSelection(color)}
-                />
-              ))}
+              <div className="color-buttons">
+                {product.colors.map((color, index) => (
+                  <button
+                    key={index}
+                    className={`color-button ${selectedColor === color ? 'selected' : ''} ${color}`}
+                    onClick={() => handleColorSelection(color)}
+                  ></button>
+                ))}
+              </div>
             </div>
           )}
 
           {/* Quantity Selection */}
           <div className="quantity-selection">
-            <label>Quantity:</label>
+            <label htmlFor="quantity">Quantity:</label>
             <input
+              id="quantity"
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={handleQuantityChange}
               min="1"
             />
           </div>
@@ -127,13 +142,13 @@ const ProductDetail = () => {
           <button className="add-to-cart-btn">Add to Cart</button>
 
           {/* Star Rating */}
-          <div className="rating-spacing">
+          <div className="rating-section">
             <h4>Rate this product:</h4>
             <div className="star-rating">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
-                  className={`star-button ${rating >= star ? 'selected' : ''}`}
+                  className={`star ${rating >= star ? 'selected' : ''}`}
                   onClick={() => setRating(star)}
                 >
                   ★
@@ -142,30 +157,30 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Review Section */}
-          <div className="reviews">
+          {/* Reviews Section */}
+          <div className="review-section">
             <h4>Reviews:</h4>
             <ul className="review-list">
               {reviews.map((review, index) => (
                 <li key={index} className="review-item">
-                  <div className="review-rating">
-                    {'★'.repeat(review.rating)}{' '}
-                    {'☆'.repeat(5 - review.rating)}
-                  </div>
+                  <p>{'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}</p>
                   <p>{review.text}</p>
                 </li>
               ))}
             </ul>
 
-            {/* Submit Review */}
-            <div className="review-submit-container">
+            {/* Review Input */}
+            <div className="review-input-section">
               <textarea
-                className="review-input"
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
                 placeholder="Write a review..."
-              />
-              <button className="submit-review-button" onClick={handleReviewSubmit}>
+              ></textarea>
+              <button
+                className="submit-review-btn"
+                onClick={handleReviewSubmit}
+                disabled={!reviewText.trim() || rating === 0}
+              >
                 Submit Review
               </button>
             </div>
