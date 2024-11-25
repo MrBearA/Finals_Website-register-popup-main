@@ -65,12 +65,12 @@ const Merchandise = () => {
             {/* Display filtered products */}
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
-                <div className="product-card" key={product.id}>
+                <div className="product-card" key={product._id}>
                   <img src={product.image} alt={product.name} className="product-image" />
                   <h3 className="product-name">{product.name}</h3>
                   <p className="short-description">{product.description}</p>
                   <p className="product-price">Price: ${product.price}</p>
-                  <Link to={`/product/${product.id}`} className="view-detail-btn">View Details</Link>
+                  <Link to={`/product/${product._id}`} className="view-detail-btn">View Details</Link>
                 </div>
               ))
             ) : (
