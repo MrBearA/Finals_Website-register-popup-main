@@ -7,6 +7,8 @@
   overflow: hidden;
   text-decoration: none; /* Remove underline */
   color: inherit; /* Make the link color inherit from its parent */
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;  /* Firefox */
 }
 
 .overlay {
@@ -102,12 +104,15 @@
   width: 100%;
   height: calc(100vh - 100px);
   position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
 .filter-section {
-  width: 200px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   padding: 20px;
+  width: 200px;
   border-right: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
   display: flex;
@@ -118,13 +123,14 @@
 }
 
 .filter-section button {
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  padding: 10px 15px;
-  margin: 5px 0;
-  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid white;
+  color: white;
   cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
   font-family: 'Zen Dots', sans-serif;
   transition: background-color 0.3s, transform 0.2s;
 }
@@ -149,15 +155,13 @@
 }
 
 .product-card {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  height: 650px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 25px;
-  padding: 20px;
-  position: relative;
 }
 
 .product-card a {
@@ -167,28 +171,46 @@
 
 .product-image {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .product-name {
-  font-size: 1.2rem;
-  color: #fffb00;
-  margin: 0.5rem 0;
+  color: yellow;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.short-description {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  margin: 0.5rem 0;
+.product-description {
+  text-align: center;
+  margin-bottom: 15px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 60px; /* Set minimum height for description */
 }
 
 .product-price {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+  text-align: center;
+  margin: 20px 0; /* Consistent margin */
+  height: 20px; /* Fixed height for price */
+  line-height: 20px; /* Match height for vertical centering */
+}
+
+.view-details-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
@@ -201,4 +223,76 @@
     text-shadow: 0 0 10px #fffb00, 0 0 20px #fffb00, 0 0 30px #fffb00; /* Glowing effect */
     margin-bottom: 10px;
   }
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.product-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.product-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent thumb */
+  border-radius: 10px;
+}
+
+/* For Firefox */
+.product-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.merchandise-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.merchandise-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.merchandise-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* If there's a specific content container that scrolls */
+.merchandise-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.merchandise-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.merchandise-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.merchandise-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* Try multiple possible selectors */
+.merchandise-container h2 {
+  font-size: 0.9rem !important;
+}
+
+.merchandise-details h2 {
+  font-size: 0.9rem !important;
+}
+
+/* If using styled-components or emotion */
+.merchandise-name {
+  font-size: 0.9rem !important;
+}
+
+/* Target by text color */
+[style*="color: rgb(255, 215, 0)"] {
+  font-size: 0.9rem !important;
 }

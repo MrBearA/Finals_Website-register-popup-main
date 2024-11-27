@@ -40,6 +40,7 @@ const Login = ({ isOpen, onClose, onSignUp, onLoginSuccess }) => {
       toast.success(response.data.message);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userName', response.data.name);
+      localStorage.setItem('userId', response.data.userId);
       
       // Dispatch custom event for login
       window.dispatchEvent(new Event('userLogin'));

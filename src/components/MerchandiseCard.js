@@ -11,12 +11,12 @@ const MerchandiseCard = ({ product }) => {
   return (
     <div className="product-card">
       <img 
-        src={product.imageurl || defaultImage} 
+        src={product.image || defaultImage} 
         alt={product.name} 
         className="product-image" 
         onError={(e) => {
-          console.error('Image failed to load:', product.imageurl);
-          e.target.src = defaultImage;
+          console.error(`Error loading image for ${product.name}:`, e);
+          e.target.src = 'path/to/fallback/image.jpg';
         }}
       />
       <h3 className="product-name">{product.name}</h3>
