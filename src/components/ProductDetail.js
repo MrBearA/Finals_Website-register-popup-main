@@ -18,6 +18,7 @@ function ProductDetail() {
           throw new Error('Failed to fetch product details');
         }
         const data = await response.json();
+        console.log('Fetched product:', data);
         setProduct(data);
       } catch (err) {
         setError(err.message);
@@ -33,13 +34,22 @@ function ProductDetail() {
   return (
     <div className="product-detail-container">
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        {product.imageurl && (
+          <img 
+            src={product.imageurl} 
+            alt={product.name} 
+            onError={(e) => {
+              console.error('Image failed to load:', product.imageurl);
+              e.target.src = '/path/to/fallback/image.jpg';
+            }}
+          />
+        )}
       </div>
       
       <div className="product-info">
         <h1 className="product-name">{product.name}</h1>
         <div className="price-section">
-          <p>Price: ${product.price}</p>
+          <p>Price: ${Number(product.price).toFixed(2)}</p>
         </div>
         
         <div className="quantity-section">
