@@ -14,7 +14,7 @@ const products = [
   {
     id: 1,
     name: 'Neon Coffee Mug',
-    image: '/Images/merch1.jpg',
+    image: ['/Imagess/merch1.jpg'],
     brand: 'Extra Hours',
     description: 'A coffee mug that lights up in neon colors while you sip your coffee.',
     price: 399,
@@ -23,7 +23,7 @@ const products = [
   {
     id: 2,
     name: 'Cyberpunk Thermos Mug',
-    image: '/Images/merch2.jpg',
+    image: ['/Imagess/merch2.jpg'],
     brand: 'Extra Hours',
     description: 'An insulated thermos mug with a sleek design, perfect for keeping your drinks cold or hot.',
     price: 999,
@@ -32,7 +32,7 @@ const products = [
   {
     id: 3,
     name: 'Cyberpunk Notebook',
-    image: '/Images/merch3.jpg',
+    image: ['/Imagess/merch3.png'],
     brand: 'Extra Hours',
     description: 'A futuristic notebook to keep records of your past for the future.',
     price: 109,
@@ -41,7 +41,7 @@ const products = [
   {
     id: 4,
     name: 'Holographic Notebook',
-    image: '/Images/merch4.jpg',
+    image: ['/Imagess/merch4.jpg'],
     brand: 'Extra Hours',
     description: 'A holographic notebook that captures the essence of cyberpunk design.',
     price: 159,
@@ -50,7 +50,7 @@ const products = [
   {
     id: 5,
     name: 'Rancid Nation x Extra Hours Shark Tank Graphic Tee',
-    image: '/Images/merch5.jpg',
+    image: ['/Imagess/merch5.jpg'],
     brand: 'Extra Hours, Rancid Nation',
     description: 'First ever collab of Rancid Nation and Extra Hours.',
     price: 499,
@@ -59,7 +59,7 @@ const products = [
   {
     id: 6,
     name: 'Retro Graphic Tee',
-    image: '/Images/merch6.jpg',
+    image: ['/Imagess/merch6.jpg'],
     brand: 'Extra Hours',
     description: 'A retro-styled graphic tee that celebrates vintage designs.',
     price: 499,
@@ -68,7 +68,7 @@ const products = [
   {
     id: 7,
     name: 'Cyberpunk Stainless Steel Tumbler',
-    image: '/Images/merch7.jpg',
+    image: ['/Imagess/merch7.jpg'],
     brand: 'Extra Hours',
     description: 'A sleek stainless steel tumbler that shines with every movement, ideal for carrying your essentials.',
     price: 899,
@@ -77,7 +77,7 @@ const products = [
   {
     id: 8,
     name: 'Cyberpunk Travel Mug',
-    image: '/Images/merch8.jpg',
+    image: ['/Imagess/merch8.jpg'],
     brand: 'Extra Hours',
     description: 'A stylish travel mug designed for coffee lovers on the go.',
     price: 599,
@@ -86,7 +86,7 @@ const products = [
   {
     id: 9,
     name: 'Cyberpunk City Tote Bag',
-    image: '/Images/merch9.jpg',
+    image: ['/Imagess/merch9.jpg'],
     brand: 'Extra Hours',
     description: 'A stylish holographic tote bag perfect for carrying your essentials while adding a touch of cyberpunk flair.',
     price: 499,
@@ -95,7 +95,7 @@ const products = [
   {
     id: 10,
     name: 'Cyberpunk Weekend Bag',
-    image: '/Images/merch10.jpg',
+    image: ['/Imagess/merch10.jpg'],
     brand: 'Extra Hours',
     description: 'A durable weekend bag designed for short trips with a cyberpunk aesthetic.',
     price: 499,
@@ -104,7 +104,7 @@ const products = [
   {
     id: 11,
     name: 'Cyber Graphic Sweater',
-    image: '/Images/merch11.jpg',
+    image: ['/Imagess/merch11.jpg'],
     brand: 'Extra Hours',
     description: 'A black and white sweater featuring bold digital patterns in a loose, futuristic design.',
     price: 499,
@@ -113,7 +113,7 @@ const products = [
   {
     id: 12,
     name: 'OniCyborg Graphic Tee',
-    image: '/Images/merch12.jpg',
+    image: ['/Imagess/merch12.jpg'],
     brand: 'Extra Hours',
     description: 'The OniCyborg tee blends bold black and red oni cybernetic designs.',
     price: 499,
