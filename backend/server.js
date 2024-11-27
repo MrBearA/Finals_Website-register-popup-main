@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path'); // Added for serving static files
 require('dotenv').config();
 
 const app = express();
@@ -12,9 +11,6 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-// Serve static images from the 'public/images' directory
-app.use('/Imagess', express.static(path.join(__dirname, 'public/Imagess')));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -97,18 +93,22 @@ app.get('/api/products', async (req, res) => {
 // Fetch single product by ID
 app.get('/api/product/:id', async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const { id } = req.params;
+    console.log('Fetching product:', id);
+    
+    const product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
+    
     res.json(product);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching product details' });
+    console.error('Server error:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
 // Start the Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 

@@ -70,7 +70,12 @@ const Merchandise = () => {
                   <h3 className="product-name">{product.name}</h3>
                   <p className="short-description">{product.description}</p>
                   <p className="product-price">Price: ${product.price}</p>
-                  <Link to={`/product/${product._id}`} className="view-detail-btn">View Details</Link>
+                  <Link 
+                    to={`/product/${product._id}`} 
+                    onClick={() => console.log('Product ID:', product._id)}
+                  >
+                    <button className="view-details-btn">View Details</button>
+                  </Link>
                 </div>
               ))
             ) : (
@@ -84,5 +89,4 @@ const Merchandise = () => {
 };
 
 export default Merchandise;
-
 
