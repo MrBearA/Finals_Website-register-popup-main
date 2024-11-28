@@ -5,10 +5,7 @@ import axios from 'axios';
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
-  const [error, setError] = useState(null);
-  const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
   const [hover, setHover] = useState(null);
   const [selectedSize, setSelectedSize] = useState('M');
@@ -39,13 +36,6 @@ function ProductDetail() {
         return;
       }
 
-      console.log('Product data:', {
-        productId: product._id,
-        name: product.name,
-        price: product.price,
-        image: product.image
-      });
-
       const response = await axios.post('http://localhost:5000/api/cart/add', {
         productId: product._id,
         name: product.name,
@@ -54,8 +44,6 @@ function ProductDetail() {
         size: product.category === 'Graphic Tee' ? selectedSize : null
       });
 
-      console.log('Response:', response.data);
-      
       if (response.status === 200) {
         alert('Item added to cart successfully!');
       }
@@ -73,7 +61,6 @@ function ProductDetail() {
     setSelectedColor(color);
   };
 
-  if (error) return <div className="error-message">{error}</div>;
   if (!product) return <div>Loading...</div>;
 
   return (
@@ -185,13 +172,12 @@ function ProductDetail() {
         )}
 
         <div className="action-buttons">
-          <div 
-            className="add-to-cart"
+          <button 
+            className="add-to-cart" 
             onClick={handleAddToCart}
           >
-            Add to Cart
-          </div>
-          <button className="checkout">Checkout</button>
+            ADD TO CART
+          </button>
         </div>
       </div>
     </div>

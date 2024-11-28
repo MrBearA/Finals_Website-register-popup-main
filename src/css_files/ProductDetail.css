@@ -727,3 +727,9 @@ textarea {
 .color-btn[style*="white"] .selected-indicator {
   background-color: #333;
 }
+
+.add-to-cart.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #cccccc;
+}

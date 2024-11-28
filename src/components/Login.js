@@ -83,7 +83,7 @@ const Login = ({ isOpen, onClose, onSignUp, onLoginSuccess }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <a href="#" className="forgot-password">Forgot Your Password?</a>
+              <a href="/signup">Sign up</a>
               <button type="submit" className="sign-in-btn">Sign In</button>
             </form>
           </div>
